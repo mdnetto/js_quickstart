@@ -1,5 +1,6 @@
 window.onload = initAll;
-var usedNums = new Array(76);
+var buzzwords = new Array (" Aggregate", "Ajax", "API", "Bandwidth", "Beta", "Bleeding edge", "Convergence", "Design pattern", "Disruptive", "DRM", "Enterprise", "Facilitate", "Folksonomy", "Framework", "Impact", "Innovate", "Long tail", "Mashup", "Microformats", "Mobile", "Monetize", "Open social",<F24><F25>"Paradigm", "Podcast", "Proactive", "Rails", "Scalable", "Social bookmarks", "Social graph", "Social software", "Spam", "Synergy", "Tagging", "Tipping point", "Truthiness", "User-generated", "Vlog", "Webinar", "Wiki", "Workflow" );
+var usedWords = new Array(buzzwords.length);
 
 function initAll() {
   if (document.getElementById) {
@@ -17,6 +18,13 @@ function newCard() {
 }
 
 function setSquare(thisSquare) {
+  do {
+    var randomWord = Math.floor(Math.random() * buzzwords.length);
+  } while (usedWords[randomWords]);
+  
+  
+
+
   var currentSquare = "square" + thisSquare;
 
   //each column has a different range of numbers
