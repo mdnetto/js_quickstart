@@ -1,5 +1,8 @@
+// why is newCard() called twice on line 11 and 41
+// why does it not redraw properly when line 41 is commented out
+
+var buzzwords = new Array ("Aggregate", "Ajax", "API", "Bandwidth", "Beta", "Bleeding edge", "Convergence", "Design pattern", "Disruptive", "DRM", "Enterprise", "Facilitate", "Folksonomy", "Framework", "Impact", "Innovate", "Long tail", "Mashup", "Microformats", "Mobile", "Monetize", "Open social","Paradigm", "Podcast", "Proactive", "Rails", "Scalable", "Social bookmarks", "Social graph", "Social software", "Spam", "Synergy", "Tagging", "Tipping point", "Truthiness", "User-generated", "Vlog", "Webinar", "Wiki", "Workflow");
 window.onload = initAll;
-var buzzwords = new Array (" Aggregate", "Ajax", "API", "Bandwidth", "Beta", "Bleeding edge", "Convergence", "Design pattern", "Disruptive", "DRM", "Enterprise", "Facilitate", "Folksonomy", "Framework", "Impact", "Innovate", "Long tail", "Mashup", "Microformats", "Mobile", "Monetize", "Open social",<F24><F25>"Paradigm", "Podcast", "Proactive", "Rails", "Scalable", "Social bookmarks", "Social graph", "Social software", "Spam", "Synergy", "Tagging", "Tipping point", "Truthiness", "User-generated", "Vlog", "Webinar", "Wiki", "Workflow" );
 var usedWords = new Array(buzzwords.length);
 
 function initAll() {
@@ -18,39 +21,24 @@ function newCard() {
 }
 
 function setSquare(thisSquare) {
+  // prevents dupe words being set and says if usedWords[0] is true
+  // it's a taken so pick another word
   do {
     var randomWord = Math.floor(Math.random() * buzzwords.length);
-  } while (usedWords[randomWords]);
-  
-  
+  } while (usedWords[randomWord]);
 
-
+  usedWords[randomWord] = true;
   var currentSquare = "square" + thisSquare;
-
-  //each column has a different range of numbers
-  var colPlace = new Array(0,0,0,0,0,1,1,1,1,1,2,2,2,2,3,3,3,3,3,4,4,4,4,4);
-  var colBasis = colPlace[thisSquare] * 15;
-  var newNum = colBasis + getNewNum() + 1;
-  var newNum;
-
-  do {
-    newNum = colBasis + getNewNum() + 1;
-  }
-  while (usedNums[newNum]);
-
-  usedNums[newNum] = true;
-  document.getElementById(currentSquare).innerHTML = newNum;
+  document.getElementById(currentSquare).innerHTML = buzzwords[randomWord];
   document.getElementById(currentSquare).className = "";
   document.getElementById(currentSquare).onmousedown = toggleColor;
 }
 
-function getNewNum() {
-  return Math.floor(Math.random() * 15);
-}
-
+//this function keeps track of which words have been selected
+//resets them to false when anotherCard is requested
 function anotherCard() {
-  for (var i=1; i<usedNums.length; i++) {
-    usedNums[i] = false;
+  for (var i=1; i < buzzwords.length; i++) {
+    usedWords[i] = false;
   }
   newCard();
   return false;
